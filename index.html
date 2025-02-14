@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>San Valentín</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('../love.jpeg'); /* Fondo */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+    }
+    .container {
+      width: 400px;
+      height: 400px;
+      cursor: pointer;
+      /* Para el efecto 3D al rotar la solapa */
+      perspective: 1200px;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ---------- ANIMACIÓN DE LA SOLAPA ---------- */
+    .flap {
+      /* Punto de pivote (centro en x=100, y=60) */
+      transform-origin: 90px 60px;
+      transform: rotateX(0deg);
+      transition: transform 1s ease-in-out;
+    }
+    .container.active .flap {
+      /* Gira la solapa hacia atrás, abriendo el sobre */
+      transform: rotateX(-180deg);
+    }
+
+    /* ---------- ANIMACIÓN DE LA CARTA (LETTER) ---------- */
+    .letter {
+      /* Espera 1s para que la solapa termine de abrirse antes de moverse */
+   
+      transition: transform 1s ease-in-out 1s;
+    }
+
+    .container.active .letter {
+      /* La carta se traslada y aumenta de tamaño */
+      transform: translate(0, -70px);
+      
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="container" onclick="openLetter()">
+    <svg viewBox="0 0 200 200">
+      <!-- 1) Parte de atrás del sobre -->
+     
+      <!-- 2) La carta (inicialmente “dentro” del sobre, detrás de la solapa) -->
+      
+      
+      <!-- 3) Solapa del sobre (dibujada al final para que tape la carta) -->
+      <polygon 
+        class="asasd" 
+        points="11,60 100,130 190,60"
+        fill="#ffb3c6" 
+        stroke="#800040" 
+        stroke-width="3"
+      />
+
+      <g class="letter">
+        <!-- Ajusta la posición (y=0 hasta y=60) para que quede oculta tras la solapa -->
+        <rect 
+          x="20" y="75" 
+          width="160" height="70"
+          fill="white" 
+          stroke="#800040" 
+          stroke-width="2"
+        />
+        <text 
+          x="30" y="100" 
+          font-size="14" 
+          font-family="cursive" 
+          fill="#800040"
+        >
+          ¿Quieres ser mi San
+        </text>
+        <text 
+          x="30" y="125" 
+          font-size="14" 
+          font-family="cursive" 
+          fill="#800040"
+        >
+          Valentín, Valeria? ❤️
+        </text>
+      </g>
+      <polygon 
+      class="envelope-back" 
+      points="10,60 100,130 190,60 190,150 10,150"
+      fill="#ffccdd" 
+      stroke="#800040" 
+      stroke-width="3"
+    />
+    </svg>
+  </div>
+  <script>
+    function openLetter() {
+      document.querySelector('.container').classList.toggle('active');
+    }
+  </script>
+</body>
+</html>
